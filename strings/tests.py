@@ -1,5 +1,5 @@
 import unittest
-from stringutils import word_wrap
+from stringutils import word_wrap_text
 
 # ==============================================================================
 class TestStringChallenge(unittest.TestCase):
@@ -23,21 +23,21 @@ class TestStringChallenge(unittest.TestCase):
     def test_empty_string(self):        
         '''Tests that empty strings are unchanged.'''
 
-        output = word_wrap('')
+        output = word_wrap_text('')
         self.assertEqual(output, '')
 
     # --------------------------------------------------------------------------
     def test_input_sample_part1(self):
         '''Tests that the part 1 of the sample test performs correctly.'''
 
-        output = word_wrap(self.input)
+        output = word_wrap_text(self.input)
         self.assertEqual(output, self.output_part1)
 
     # --------------------------------------------------------------------------
     def test_input_sample_part2(self):
         '''Tests that the part 2 of the sample test performs correctly.'''
 
-        output = word_wrap(self.input, justify=True)
+        output = word_wrap_text(self.input, justify=True)
         self.assertEqual(output, self.output_part2)
 
 # ==============================================================================

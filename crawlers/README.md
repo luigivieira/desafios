@@ -18,6 +18,8 @@ Consideramos como bombando *threads* com 5000 pontos ou mais.
 
 # Solução
 
+## Parte 1
+
 A solução foi implementada em Python 3. O código da solução se encontra no arquivo `reddit.py` via a função assíncrona `get_subreddits`.
 
 Ao invés de fazer webscrap no HTML, eu optei por acessar diretamente os dados disponíveis do servidor em formato JSON, já que o Reddit fornece uma API REST para tal. Exemplo de chamada nessa api:
@@ -120,4 +122,19 @@ Outro exemplo:
 
 	================================================================================
 
-A parte 2 ainda está sendo desenvolvida.
+## Parte 2
+
+A solução, também implementada em Python 3, está no arquivo `telegram_bot.py`. Ele é um servidor CLI que responde às requisições do bot para o token fornecido na linha de comando da execução do script. O script, quando executado como `python telegram_bot.py -h` exibe a seguinte ajuda:
+
+	usage: telegram_bot.py [-h] -t digits
+
+	Implementation of the Telegram Bot named @OciosDoOficioBot. Created by Luiz C.
+	Vieira for the IDWall Challenge (2018).
+
+	optional arguments:
+	  -h, --help            show this help message and exit
+	  -t digits, --token digits
+							The token created by the @BotFather and used to
+							command the OciosDoOficioBot bot.
+
+Ou seja, para utilizá-la, simplesmente crie um novo bot no Telegram (utilizando @BotFather e seguindo a documentação online), e utilize o token obtido na execução do script. O nome do bot utilizado nos testes foi @OciosDoOficio, mas você pode utilizar qualquer nome de bot.

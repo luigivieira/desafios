@@ -16,16 +16,100 @@ Cada *thread* possui uma pontuação que, simplificando, aumenta com "up votes" 
 Sua missão é encontrar e listar as *threads* que estão bombando no Reddit naquele momento!
 Consideramos como bombando *threads* com 5000 pontos ou mais.
 
-## Entrada
-- Lista com nomes de subreddits separados por ponto-e-vírgula (`;`). Ex: "askreddit;worldnews;cats"
+# Solução
 
-### Parte 1
-Gerar e imprimir uma lista contendo número de upvotes, subreddit, título da thread, link para os comentários da thread, link da thread.
-Essa parte pode ser um CLI simples, desde que a formatação da impressão fique legível.
+A solução foi implementada em Python 3. O código da solução se encontra no arquivo `reddit.py` via a função assíncrona `get_subreddits`.
 
-### Parte 2
-Construir um robô que nos envie essa lista via Telegram sempre que receber o comando `/NadaPraFazer [+ Lista de subrredits]` (ex.: `/NadaPraFazer programming;dogs;brazil`)
+Ao invés de fazer webscrap no HTML, eu optei por acessar diretamente os dados disponíveis do servidor em formato JSON, já que o Reddit fornece uma API REST para tal. Exemplo de chamada nessa api:
 
-### Dicas
- - Use https://old.reddit.com/
- - Qualquer método para coletar os dados é válido. Caso não saiba por onde começar, procure por JSoup (Java), SeleniumHQ (Java), PhantomJS (Javascript) e Beautiful Soup (Python).
+GET https://old.reddit.com/r/cats/top.json?sort=top&t=day&limit=2
+
+Retorna um JSON com as duas threads de maior score no subreddit "cats" na data de hoje (isto é, nas últimas 24 horas)
+
+A função `get_subreddits` retorna um dicionário Python, de forma que a parte 1 foi implementada no arquivo de script `list_top_r.py`, um CLI que simplesmente processa esse dicionário e imprime na saída padrão os dados formatados. Ele é parametrizável via argumentos da linha de comando, de forma que se pode definir o número máximo de threads obtidas (utilizado para limitar a carga no servidor e na comunicação, com default em 50) e o score mínimo para uma thread ser considerada como "bombando" (utilizando o default de 5000, como indicado no enunciado). A sintaxe de chamada do programa pode ser obtida executando-se `python list_top_r.py -h`, produzindo a seguinte saída:
+
+	usage: list_top_r.py [-h] -s "name[;name;...]" [-l value] [-m value]
+
+	Lists the top reddit threads for the given subreddits. Created by Luiz C.
+	Vieira for the IDWall Challenge (2018).
+
+	optional arguments:
+	  -h, --help            show this help message and exit
+	  -s "name[;name;...]", --subreddits "name[;name;...]"
+							Semicolon-separated list of subreddit names to query.
+							IMPORTANT: The quotes are mandatory if you are
+							providing more than one name, since the semicolons
+							will be understood by the command line processor as
+							separators for different commands.
+	  -l value, --limit value
+							Limit of threads to get for each subreddit. The
+							default value is 50, and the minimum acceptable value
+							is 1.
+	  -m value, --min_score value
+							Minimum score for threads to be considered as top,
+							besides the indication of reddit itself. The default
+							value is 5000, and the minimum acceptable value is 0
+							(case in which this argument is disconsidered).
+							
+Exemplo de execução:
+
+	> python list_top_r.py -s "cats;brazil" -l 10 -m 4000	
+	================================================================================
+	TOP THREADS ON REDDIT TODAY (limiting in 10 threads with minimum score of 4000)
+	================================================================================
+	SUBREDDIT: cats
+
+			URL: https://v.redd.it/vohzzhby5mt11
+			TITLE: Throwback to when my cat decided to race the laundry basket around the house. I still to this day don’t know how she managed this.
+			SCORE: 10084
+			UP VOTES: 10084
+			DOWN VOTES: 0
+			AUTHOR: Sw1fty3
+			NUMBER OF COMMENTS: 142
+			COMMENTS URL: https://old.reddit.com/r/cats/comments/9q7r5a/throwback_to_when_my_cat_decided_to_race_the/
+			URL: https://imgur.com/gtJGlem
+			TITLE: This is Zuli. She's 20 years old and I just adopted her Friday
+			SCORE: 4622
+			UP VOTES: 4622
+			DOWN VOTES: 0
+			AUTHOR: Meatloaf_In_Africa
+			NUMBER OF COMMENTS: 114
+			COMMENTS URL: https://old.reddit.com/r/cats/comments/9q9mr6/this_is_zuli_shes_20_years_old_and_i_just_adopted/
+
+	SUBREDDIT: brazil
+
+			There are no threads in the query conditions (i.e. limit and minimum score)
+
+	================================================================================
+
+Outro exemplo:
+
+	python list_top_r.py -s "cats;brazil" -l 1 -m 0
+	================================================================================
+	TOP THREADS ON REDDIT TODAY (limiting in 1 threads with minimum score of 0)
+	================================================================================
+	SUBREDDIT: cats
+
+			URL: https://v.redd.it/vohzzhby5mt11
+			TITLE: Throwback to when my cat decided to race the laundry basket around the house. I still to this day don’t know how she managed this.
+			SCORE: 10096
+			UP VOTES: 10096
+			DOWN VOTES: 0
+			AUTHOR: Sw1fty3
+			NUMBER OF COMMENTS: 142
+			COMMENTS URL: https://old.reddit.com/r/cats/comments/9q7r5a/throwback_to_when_my_cat_decided_to_race_the/
+
+	SUBREDDIT: brazil
+
+			URL: https://www.reddit.com/r/brasil
+			TITLE: Looking to ask or post somethinga about Brazil? Check r/brasil!
+			SCORE: 14
+			UP VOTES: 14
+			DOWN VOTES: 0
+			AUTHOR: Tetizeraz
+			NUMBER OF COMMENTS: 2
+			COMMENTS URL: https://old.reddit.com/r/Brazil/comments/92vupe/looking_to_ask_or_post_somethinga_about_brazil/
+
+	================================================================================
+
+A parte 2 ainda não foi desenvolvida.

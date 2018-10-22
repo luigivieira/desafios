@@ -61,26 +61,34 @@ Exemplo de execução:
 
 			URL: https://v.redd.it/vohzzhby5mt11
 			TITLE: Throwback to when my cat decided to race the laundry basket around the house. I still to this day don’t know how she managed this.
-			SCORE: 10084
-			UP VOTES: 10084
+			SCORE: 10541
+			UP VOTES: 10541
 			DOWN VOTES: 0
 			AUTHOR: Sw1fty3
-			NUMBER OF COMMENTS: 142
+			NUMBER OF COMMENTS: 159
 			COMMENTS URL: https://old.reddit.com/r/cats/comments/9q7r5a/throwback_to_when_my_cat_decided_to_race_the/
+
 			URL: https://imgur.com/gtJGlem
 			TITLE: This is Zuli. She's 20 years old and I just adopted her Friday
-			SCORE: 4622
-			UP VOTES: 4622
+			SCORE: 5528
+			UP VOTES: 5528
 			DOWN VOTES: 0
 			AUTHOR: Meatloaf_In_Africa
-			NUMBER OF COMMENTS: 114
+			NUMBER OF COMMENTS: 134
 			COMMENTS URL: https://old.reddit.com/r/cats/comments/9q9mr6/this_is_zuli_shes_20_years_old_and_i_just_adopted/
+
+			URL: https://i.redd.it/rs41h3a77qt11.jpg
+			TITLE: 18 years later and he is still killing it
+			SCORE: 6441
+			UP VOTES: 6441
+			DOWN VOTES: 0
+			AUTHOR: TheColorPeanut
+			NUMBER OF COMMENTS: 83
+			COMMENTS URL: https://old.reddit.com/r/cats/comments/9qd3x0/18_years_later_and_he_is_still_killing_it/
 
 	SUBREDDIT: brazil
 
 			There are no threads in the query conditions (i.e. limit and minimum score)
-
-	================================================================================
 
 Outro exemplo:
 
@@ -92,11 +100,11 @@ Outro exemplo:
 
 			URL: https://v.redd.it/vohzzhby5mt11
 			TITLE: Throwback to when my cat decided to race the laundry basket around the house. I still to this day don’t know how she managed this.
-			SCORE: 10096
-			UP VOTES: 10096
+			SCORE: 10542
+			UP VOTES: 10542
 			DOWN VOTES: 0
 			AUTHOR: Sw1fty3
-			NUMBER OF COMMENTS: 142
+			NUMBER OF COMMENTS: 159
 			COMMENTS URL: https://old.reddit.com/r/cats/comments/9q7r5a/throwback_to_when_my_cat_decided_to_race_the/
 
 	SUBREDDIT: brazil
@@ -112,4 +120,4 @@ Outro exemplo:
 
 	================================================================================
 
-A parte 2 ainda não foi desenvolvida.
+A parte 2 ainda está sendo desenvolvida.

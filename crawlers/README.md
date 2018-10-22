@@ -18,6 +18,15 @@ Consideramos como bombando *threads* com 5000 pontos ou mais.
 
 # Solução
 
+## Dependências
+
+A minha solução para esse desafio também foi construída em Python 3. Porém, diferentemente do desafio anterior que utiliza apenas recursos nativos do Python, esta solução requer alguns pacotes que precisam ser instalados manualmente (via o comando `pip install <nome do pacote>`). São eles:
+
+- [aiohttp](https://aiohttp.readthedocs.io/en/stable/)
+- [pyTelegramBotAPI](https://github.com/eternnoir/pyTelegramBotAPI)
+
+O primeiro é utilizado para a comunicação HTTP com o servidor do Reddit, e o segundo para a comunicação do bot com o serviço do Telegram.
+
 ## Parte 1
 
 A solução foi implementada em Python 3. O código da solução se encontra no arquivo `reddit.py` via a função assíncrona `get_subreddits`.

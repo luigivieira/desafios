@@ -134,8 +134,11 @@ def main(argv):
             bot.send_message(message.chat.id, 'Cuma? Não entendi. Tente a ajuda '
             'em /help.')
 
-    bot.polling()
+    signal.signal(signal.SIGINT, signal_handler)
+    print('The OciosDoOficio Telegram bot server is started.')
+    print('Press Ctrl+C to stop.')
 
+    bot.polling()
     return 0
 
 #---------------------------------------------
@@ -169,7 +172,4 @@ def parseCommandLine(argv):
 
 # ------------------------------------------------------------------------------
 if __name__ == "__main__":
-    signal.signal(signal.SIGINT, signal_handler)
-    print('The OciosDoOficio Telegram bot server is started.')
-    print('Press Ctrl+C to stop.')
     sys.exit(main(sys.argv[1:]))

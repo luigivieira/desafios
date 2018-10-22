@@ -1,13 +1,33 @@
+import signal
 import sys
 import argparse
 import asyncio
 
 import telebot
-from reddit import get_subreddits 
+from reddit import get_subreddits
+
+# ------------------------------------------------------------------------------
+def signal_handler(_, __):
+    '''Handles the Ctrl+C in the console so the application can quit elegantly.
+    '''
+    print('The OciosDoOficio Telegram Bot was stopped.')
+    sys.exit(0)
 
 # ------------------------------------------------------------------------------
 def _get_reddit_data(subreddits):
-    '''
+    '''Gets the data for the given subreddits.
+
+    Parameters
+    ----------
+        subreddits (list). List of strings with the subreddits to query.
+
+    Returns
+    -------
+        text (str). The formatted text with the data queried for the subreddits
+        and ready to be sent back to the Telegram via a new (or reply) message.
+        Important: This text might be very large, so you should break it up
+        into chunks of a maximum length of 3000 bytes in order to send back
+        to Telegram without impairing the system.
     '''
     data = asyncio.run(get_subreddits(subreddits))
     text = '=' * 30 + '\n'
@@ -149,4 +169,7 @@ def parseCommandLine(argv):
 
 # ------------------------------------------------------------------------------
 if __name__ == "__main__":
+    signal.signal(signal.SIGINT, signal_handler)
+    print('The OciosDoOficio Telegram bot server is started.')
+    print('Press Ctrl+C to stop.')
     sys.exit(main(sys.argv[1:]))
